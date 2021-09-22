@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  nginx:
+    image: 6to:nginx
+    expose:
+      - 80
+    ports:
+      - 80:80
+    depends_on:
+      - php
+    volumes:
+      - app-data:/var/www/html
+
+  php:
+    image: 6to:php74
+    command: ["php-fpm", "-F"]
+    expose:
+      - 9074
+    depends_on:
+      - mysql
+    volumes:
+      - app-data:/var/www/html
+    extra_hosts:
+      - "host.docker.internal:172.23.249.23"
+    environment:
+      XDEBUG_MODE: "${XDEBUG_MODE}"
+
+  mysql:
+    image: 6to:mysql
+    expose:
+      - 3306
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  app-data:
+  db-data:

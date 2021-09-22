@@ -1,0 +1,161 @@
+{
+    "name": "systonic/drupal-project",
+    "description": "Project template for Drupal 9 projects with a relocated document root",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/admin_toolbar": "^3.0",
+        "drupal/antibot": "^1.4",
+        "drupal/backup_migrate": "^5",
+        "drupal/better_exposed_filters": "^5.0@beta",
+        "drupal/bg_image_formatter": "^1.14",
+        "drupal/block_class": "^1.3",
+        "drupal/ckeditor_templates": "^1.2",
+        "drupal/ckeditor_templates_ui": "^1.4",
+        "drupal/core-composer-scaffold": "^9.1",
+        "drupal/core-project-message": "^9.1",
+        "drupal/core-recommended": "^9.1",
+        "drupal/crop": "^2.1",
+        "drupal/draggableviews": "^2.0",
+        "drupal/editor_advanced_link": "^1.8",
+        "drupal/email_contact": "^1.2",
+        "drupal/embed": "^1.4",
+        "drupal/field_limiter": "^1.1",
+        "drupal/focal_point": "^1.5",
+        "drupal/image_widget_crop": "^2.3",
+        "drupal/layout_builder_restrictions": "^2.8",
+        "drupal/libraries": "^3.0@beta",
+        "drupal/linkit": "^6",
+        "drupal/manage_display": "^1.0@beta",
+        "drupal/menu_link_attributes": "^1.2",
+        "drupal/metatag": "^1.16",
+        "drupal/module_filter": "^3.2",
+        "drupal/opquast_checklist": "^2.0",
+        "drupal/pathauto": "^1.8",
+        "drupal/rabbit_hole": "^1.0@beta",
+        "drupal/redirect": "^1.6",
+        "drupal/scheduler": "^1.3",
+        "drupal/search_api": "^1.19",
+        "drupal/simple_sitemap": "^3.9",
+        "drupal/slick": "^2.2",
+        "drupal/slick_entityreference": "^2.0",
+        "drupal/slick_views": "^2.3",
+        "drupal/smart_trim": "^1.3",
+        "drupal/svg_image": "^1.14",
+        "drupal/token_filter": "^1.2",
+        "drupal/twig_vardumper": "^3",
+        "drupal/views_bulk_operations": "^3.12",
+        "drupal/views_infinite_scroll": "^1.8",
+        "drupal/webform": "^6.0",
+        "drupal/yaml_editor": "^1.1",
+        "drupal/yoast_seo": "^2",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "wikimedia/composer-merge-plugin": "^2.0"
+    },
+    "require-dev": {
+        "drupal/devel": "^4.1",
+        "drupal/devel_php": "^1.3",
+        "drush/drush": "^10.4",
+        "webflo/drupal-finder": "^1.2",
+        "zaporylie/composer-drupal-optimizations": "^1.2"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            },
+            "file-mapping": {
+                "[web-root]/.csslintrc": false,
+                "[web-root]/.eslintignore": false,
+                "[web-root]/.eslintrc.json": false,
+                "[web-root]/.ht.router.php": false,
+                "[web-root]/example.gitignore": false,
+                "[web-root]/INSTALL.txt": false,
+                "[web-root]/README.txt": false,
+                "[web-root]/web.config": false,
+                "[web-root]/sites/README.txt": false,
+                "[web-root]/modules/README.txt": false,
+                "[web-root]/profiles/README.txt": false,
+                "[web-root]/themes/README.txt": false
+            }
+        },
+        "installer-types": [
+            "npm-asset",
+            "bower-asset"
+        ],
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/slick": [
+                "npm-asset/slick-carousel"
+            ],
+            "web/libraries/tarteaucitron.js": [
+                "npm-asset/tarteaucitronjs"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:npm-asset",
+                "type:bower-asset"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        },
+        "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
+            ]
+        },
+        "patches": {
+        },
+        "patchLevel": {
+            "drupal/core": "-p2"
+        }
+    },
+    "autoload": {
+        "classmap": [
+            "scripts/ScriptHandler.php"
+        ]
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "DrupalProject\\ScriptHandler::createRequiredFiles"
+        ]
+    }
+}
