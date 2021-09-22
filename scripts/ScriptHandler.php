@@ -92,16 +92,6 @@ class ScriptHandler {
       $fs->chmod($drupalRoot . '/sites/default/files', 0775, 0000, true);
     }
 
-    // Copy .gitignore/phploy.ini
-    if (!$fs->exists('.gitignore')) {
-      $fs->rename('scripts/gitignore', '.gitignore');
-      $event->getIO()->write("Created .gitignore");
-    }
-    if (!$fs->exists('phploy.ini')) {
-      $fs->rename('scripts/phploy.ini', 'phploy.ini');
-      $event->getIO()->write("Created phploy.ini");
-    }
-
     $name = basename(getcwd());
     $event->getIO()->write("Install site via:");
     $event->getIO()->write("vendor/bin/drush site:install minimal --existing-config --db-url='mysql://root:root@mysql:3306/$name' --locale='fr' --site-name='$name' --site-mail='no-reply@systonic.fr' --account-name='systonic_$name' --account-mail='EMAIL' --account-pass='PASS'");
