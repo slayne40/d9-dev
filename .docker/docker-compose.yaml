@@ -22,9 +22,7 @@ services:
     volumes:
       - ../:/var/www/html
     extra_hosts:
-      - "host.docker.internal:172.23.249.23"
-    environment:
-      XDEBUG_MODE: "${XDEBUG_MODE}"
+      - "host.docker.internal:host-gateway"
 
   mysql:
     image: 6to:mysql
